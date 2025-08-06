@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}सत्व लाइब्रेरी {% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;600&display=swap" rel="stylesheet">
+
+
+
+</head>
+<body>
+    <nav>
+    <div class="nav-wrapper">
+     <div class="logo">
+      सत्व लाइब्रेरी
+       </div>
+       <div class="nav-links">
+  <a href="{{url_for('home')}}">होम</a>
+  <a href="{{url_for('about')}}">हमारे बारे में</a>
+  <a href="{{url_for('gallery')}}">गैलरी</a>
+  <a href="{{url_for('contact')}}">संपर्क करें</a>
+  <a href="{{url_for('plan')}}">प्लान्स</a>
+ 
+</div>
+
+
+    </div>
+</nav>
+
+    {% block hero %}
+   <header class="hero" id="home">
+    <div class="hero-content">
+      <h1>"सत्व लाइब्रेरी में हार्दिक स्वागत है"<h1>
+        <p>"शांत। उत्पादक। उद्देश्यपूर्ण।"</p>
+         
+    </div>
+   </header>
+    {% endblock %}
+   <main>
+
+    
+
+           <div  class="center-content">
+               
+               {% block content %}
+
+              
+               {%  endblock %}
+            </div>
+       
+   </main>
+  
+   <footer>
+     <div class="footer-content">
+      <p> स्थान विवरण:
+        
+         मिश्रा टोला, वार्ड नंबर 18, सरयुग कैंपस, शिवहर - 843329 (बिहार)
+
+</p>
+      <p>"प्रत्येक दिन खुला | प्रातः 6 बजे से रात्रि 10 बजे तक" </p>
+      </div>
+     
+   </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const lightbox=document.getElementById("lightbox")
+     const lightboxImg = document.getElementById("lightbox-img");
+
+
+     document.addEventListener("DOMContentLoaded", function() {
+
+        const galleryImages=document.querySelectorAll(".gallery-grid img");
+        
+        galleryImages.forEach((img)=>{
+          img.addEventListener("click",function(){
+              lightbox.style.display="flex";
+              lightboxImg.src=this.src;
+              lightboxImg.alt=this.alt;
+
+          });
+        });
+      });
+      function closeLightbox(){
+        lightbox.style.display="none";
+        lightboxImg.src="";
+      }
+
+      
+    </script>
+    <script>
+  window.onload = function () {
+    // Step 1: Get URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Step 2: Get the value of the 'plan' parameter from the URL
+    const selectedPlan = urlParams.get("plan");
+
+    // Step 3: Reference to the dropdown element
+    const planDropdown = document.querySelector("select");
+
+    // Step 4: Map plan codes to visible dropdown text
+    const planMap = {
+      "thinker-400": "थिंकर प्लान ₹400/महीना",
+      "seeker-1000": "सीकर प्लान ₹1000/महीना",
+      "thinker-4000": "थिंकर वार्षिक ₹4000/वर्ष",
+      "seeker-10000": "सीकर वार्षिक ₹10,000/वर्ष"
+    };
+
+    // Step 5: If a matching plan is found in URL, update the dropdown
+    if (selectedPlan && planMap[selectedPlan]) {
+      const displayText = planMap[selectedPlan];
+
+      for (let i = 0; i < planDropdown.options.length; i++) {
+        if (planDropdown.options[i].text === displayText) {
+          planDropdown.selectedIndex = i;
+          break;
+        }
+      }
+    }
+  };
+</script>
+ <!-- Show password Toggle Script -->
+  <script>
+    function tooglepassword() {
+      const passwordInput=document.getElementById("password");
+      passwordInput.type=passwordInput.type==="password" ? "text":"password";
+      
+    }
+  </script>
+
+</body>
+</html>

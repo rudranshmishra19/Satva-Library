@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block hero %}
+<!-- intentionally left blackto skip hero section  -->
+{% endblock %}
+{% block content %}
+     <div class="gallery-section">
+      <h2>"सत्व पुस्तकालय में सहेजे गए यादगार पल"</h2>
+      <p>"हालिया आयोजनों और समुदायिक पलों की झलकियों का आनंद लें" </p>
+      <div class="gallery-grid">
+           <img src="{{ url_for('static', filename='img/Inauguration.jpg') }}" alt="inauguration">
+           <img src="{{ url_for('static', filename='img/Ex_satv.jpg') }}" alt="Exterior">
+          <img src="{{url_for('static',filename='img/interior_satv.jpg')}}" alt="interior_satv">
+          <img src="{{url_for('static',filename='img/Ex.jpg')}}" alt="interior_satv">
+          <img src="{{url_for('static',filename='img/DM.jpg')}}" alt="interior_satv">
+        
+      </div>
+      <br>
+      <br>
+      <hr>
+        <h2> आंतरिक सजावट/ भीतरी सजावट <h2>
+      <div class="gallery-grid">
+          <img src="{{url_for('static',filename='img/outside.jpg')}}" alt="Exterior_satva">
+          <img src="{{url_for('static',filename='img/interiro.jpg')}}" alt="interior_satva">
+          <img src="{{url_for('static',filename='img/left_side.jpg')}}" alt="left_side_satva">
+          <img src="{{url_for('static',filename='img/wall_a.jpg')}}" alt="interior_satva">
+          <img src="{{url_for('static',filename='img/wall_b.jpg')}}" alt="interior_satva">
+          <img src="{{url_for('static',filename='img/wall_photo.jpg')}}" alt="interior_satva">
+          <img src="{{url_for('static',filename='img/wall_photos.jpg')}}" alt="interior_satva">
+          <img src="{{url_for('static',filename='img/wall_phots.jpg')}}" alt="interior_satva">
+
+   </div>
+
+     </div>
+     
+<!-- Lightbox Overlay -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Gallery Preview">
+</div>
+     
+{% endblock %}
