@@ -10,8 +10,13 @@ load_dotenv () # <- Load variables from .env
 app = Flask(__name__)
 app.secret_key=os.environ.get("SECRET_KEY")or "fallback_secret"
 
+db_url=os.environ.get("DATABASE_URL")
+if db_url and db_url.startswith("postgres://"):
+    db_url=db_url.replace("postgres://","postgresql://",1)
+
+
 #Replace these with your actual credentials
-app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get("DATABASE_URL")
+app.config['SQLALCHEMY_DATABASE_URI']=db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= False
 
 db=SQLAlchemy(app)
