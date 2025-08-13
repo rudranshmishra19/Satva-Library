@@ -34,7 +34,14 @@ class User(db.Model):
     fullname=db.Column(db.String(150),nullable=False)
     email=db.Column(db.String(150),unique=True,nullable=False)
     password=db.Column(db.String(200),nullable=False) #Hashed Password
-    
+
+class Booking(db.Model):
+    id= db.Column(db.Integer,primary_key=True)
+    name=db.Column(db.String(100),nullable=False)
+    email=db.Column(db.String(120),nullable=False)    
+    phone=db.Column(db.String(20),nullable=False)
+    plan=db.Column(db.String(50),nullable=False)
+    start_date=db.Column(db.String(20),nullable=False)   
 # Define a route for the root URL ("/")
 @app.route("/")
 @app.route("/home")
@@ -60,6 +67,38 @@ def plan():
 @app.route("/book")
 def book():
     return render_template("book.html")
+
+@app.route("/submit_booking",methods=["GET","POST"])
+def submit_booking():
+    if request.method =="POST":
+        name=request.form["name"]
+        email=request.form["email"]
+        phone=request.form["phone"]
+        plan=request.form["plan"]
+        start_date=request.form["start_date"]
+
+    #Save to database
+        new_booking=Booking(
+          name=name,
+          email=email,
+          phone=phone,
+          plan=plan,
+          start_date=start_date
+       )
+        db.session.add(new_booking)
+        db.session.commit()
+    
+        return render_template(
+            "submit_booking.html",
+          name=name,
+          email=email,
+          phone=phone,
+          plan=plan,
+          start_date=start_date
+
+     )
+
+    return render_template("submit_booking.html")
 
 
 
@@ -119,4 +158,4 @@ if __name__ == "__main__":
     with app.app_context():
         db.create_all()
         
-    app.run(debug=False)
+    app.run(debug=True)
