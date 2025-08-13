@@ -20,6 +20,8 @@ app.config['SQLALCHEMY_DATABASE_URI']=db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= False
 
 db=SQLAlchemy(app)
+with app.app_context():
+    db.create_all()
 #Define a model
 class Contact(db.Model):
      Id=db.Column(db.Integer,primary_key=True)
@@ -155,7 +157,5 @@ def admin():
 
 # Run the application if the script is executed directly
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
         
-    app.run(debug=True)
+    app.run(debug=False)
