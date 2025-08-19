@@ -1,19 +1,21 @@
 from flask import Flask, render_template, request, redirect, session,flash
 from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import check_password_hash,generate_password_hash
+from flask_scrypt import generate_random_salt,generate_password_hash,check_password_hash
 from dotenv import load_dotenv
 import os
 
 
 load_dotenv () # <- Load variables from .env
 # Create an instance of the Flask class
+#Initialize Flask
 app = Flask(__name__)
 app.secret_key=os.environ.get("SECRET_KEY")or "fallback_secret"
 
+#Database URL fix for postgress
 db_url=os.environ.get("DATABASE_URL")
 if db_url and db_url.startswith("postgres://"):
     db_url=db_url.replace("postgres://","postgresql://",1)
-
+print("Active DB URL:",db_url)    
 
 #Replace these with your actual credentials
 app.config['SQLALCHEMY_DATABASE_URI']=db_url
@@ -24,7 +26,7 @@ with app.app_context():
     db.create_all()
 #Define a model
 class Contact(db.Model):
-     Id=db.Column(db.Integer,primary_key=True)
+     id=db.Column(db.Integer,primary_key=True)
      Name=db.Column(db.String(100))
      Email=db.Column(db.String(120))
      Number=db.Column(db.String(20))
@@ -33,9 +35,10 @@ class Contact(db.Model):
 #Define User for admin
 class User(db.Model):
     id=db.Column(db.Integer,primary_key=True)
-    fullname=db.Column(db.String(150),nullable=False)
+    username=db.Column(db.String(150),nullable=False)
     email=db.Column(db.String(150),unique=True,nullable=False)
     password=db.Column(db.String(200),nullable=False) #Hashed Password
+    salt=db.Column(db.String(32),nullable=False)  #store salt
 
 class Booking(db.Model):
     id= db.Column(db.Integer,primary_key=True)
@@ -125,28 +128,27 @@ def submit():
 def login():
     error=None
     if request.method=="POST":
+        username=request.form["username"].strip()
         email=request.form["email"].strip()
         password=request.form["password"].strip()
 
         user=User.query.filter_by(email=email).first()
 
-        if user and check_password_hash(user.password,password):
+        if user and check_password_hash(user.password.encode(),password.encode(),user.salt.encode()):
         # login sucessful    
             session["user_id"]=user.id
             flash("Login sucessful","success")
             return redirect("/admin")
         else:
-            error="Invalid email or password"
+            error="Invalid username ,email or password"
     return render_template("login.html",error=error)
 
-@app.route("/logout",methods=["POST"])
+@app.route("/logout")
 def logout():
     session.pop("user_id",None)
     flash("Logged out successfully","success")
     return redirect("/login")
         
-
-
 @app.route("/admin")
 def admin():
     if "user_id" not in session:
@@ -158,4 +160,4 @@ def admin():
 # Run the application if the script is executed directly
 if __name__ == "__main__":
         
-    app.run(debug=False)
+    app.run(debug=True)
