@@ -738,3 +738,41 @@
     width: 100%;
   }
 }
+.menu-icon {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: white;
+}
+
+/* Hide nav links on small screens initially */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #4a90e2;
+    position: absolute;
+    top: 60px; /* adjust according to nav height */
+    left: 0;
+  }
+
+  .nav-links a {
+    margin: 10px 0;
+    padding: 12px 20px;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .nav-wrapper {
+    position: relative;
+  }
+
+  /* Show nav-links when active */
+  .nav-links.active {
+    display: flex;
+  }
+}
+

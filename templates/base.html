@@ -17,7 +17,9 @@
      <div class="logo">
       सत्व लाइब्रेरी
        </div>
-       <div class="nav-links">
+       <div class="menu-icon" id="menu-icon">&#9776;</div>
+       <!-- Hamburger icon -->
+       <div class="nav-links" id="nav-links">
   <a href="{{url_for('home')}}">होम</a>
   <a href="{{url_for('about')}}">हमारे बारे में</a>
   <a href="{{url_for('gallery')}}">गैलरी</a>
@@ -131,6 +133,15 @@
       
     }
   </script>
+  <script>
+  const menuIcon = document.getElementById('menu-icon');
+  const navLinks = document.getElementById('nav-links');
+
+  menuIcon.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+</script>
+
 
 </body>
 </html>
