@@ -605,4 +605,136 @@
         font-size: 18px;
         font-family: 'Noto Sans', 'Noto Sans Devangari',sans-serif;
       }
-      
+      /* Responsive adjustments for tablets and smaller screens */
+@media (max-width: 768px) {
+  nav .nav-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 15px;
+  }
+
+  .nav-links {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 10px;
+  }
+
+  .nav-links a {
+    margin-left: 0;
+    margin-right: 15px;
+    margin-top: 10px;
+  }
+
+  .features-container,
+  .gallery-grid,
+  .pricing-cards {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .feature-box,
+  .card {
+    max-width: 100%;
+    flex: none;
+  }
+
+  .booking-container,
+  .contact-form,
+  .login-container {
+    width: 90%;
+    padding: 20px;
+    margin: 1rem auto;
+  }
+
+  main {
+    margin-top: 20px;
+    padding: 0 15px;
+  }
+
+  .hero-content {
+    padding: 1.5rem 2rem;
+  }
+}
+
+/* Responsive adjustments for mobile phones */
+@media (max-width: 480px) {
+  nav .nav-wrapper {
+    padding: 10px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    margin-top: 15px;
+  }
+
+  .nav-links a {
+    display: block;
+    margin: 8px 0;
+    font-size: 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .center-content table {
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+
+  .submit-btn,
+  .book-btn,
+  .login-button {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.1rem;
+    box-sizing: border-box;
+  }
+
+  .booking-form input,
+  .booking-form select {
+    font-size: 0.9rem;
+  }
+
+  .booking-info,
+  .feature-box,
+  .card {
+    padding: 15px;
+  }
+
+  .logout-button {
+    margin: 10px;
+    text-align: center;
+  }
+
+  .logout-button button {
+    width: 100%;
+    padding: 12px;
+  }
+}
+
+/* Make tables scroll horizontally on small devices */
+.center-content table {
+  display: block;
+  overflow-x: auto;
+  width: 100%;
+}
+
+/* Make form inputs and buttons full-width on small screens */
+@media (max-width: 480px) {
+  .form-input,
+  input[type="email"],
+  input[type="password"],
+  select,
+  textarea {
+    width: 100%;
+  }
+}
