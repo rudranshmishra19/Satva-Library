@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session,flash
 from flask_sqlalchemy import SQLAlchemy
-from flask_scrypt import generate_random_salt,generate_password_hash,check_password_hash
+from werkzeug.security import generate_password_hash,check_password_hash
 from dotenv import load_dotenv
 import os
 
@@ -35,10 +35,9 @@ class Contact(db.Model):
 #Define User for admin
 class User(db.Model):
     id=db.Column(db.Integer,primary_key=True)
-    username=db.Column(db.String(150),nullable=False)
     email=db.Column(db.String(150),unique=True,nullable=False)
     password=db.Column(db.String(200),nullable=False) #Hashed Password
-    salt=db.Column(db.String(32),nullable=False)  #store salt
+
 
 class Booking(db.Model):
     id= db.Column(db.Integer,primary_key=True)
@@ -128,29 +127,60 @@ def submit():
 def login():
     error=None
     if request.method=="POST":
-        username=request.form["username"].strip()
         email=request.form["email"].strip()
         password=request.form["password"].strip()
 
         user=User.query.filter_by(email=email).first()
 
-        if user and check_password_hash(user.password.encode(),password.encode(),user.salt.encode()):
+        if user and check_password_hash(user.password,password):
         # login sucessful    
             session["user_id"]=user.id
             flash("Login sucessful","success")
             return redirect("/admin")
         else:
-            error="Invalid username ,email or password"
+            error="Invalid email or password"
     return render_template("login.html",error=error)
-
+ 
 @app.route("/logout")
 def logout():
     session.pop("user_id",None)
     flash("Logged out successfully","success")
     return redirect("/login")
+
+
+@app.route("/update_password", methods=["GET", "POST"])
+def update_password():
+    error = None
+    success = None
+    
+    if request.method == "POST":
+        email = request.form["email"].strip()
+        current_password = request.form["current_password"].strip()
+
+        new_password = request.form["new_password"].strip()
+        confirm_password = request.form["confirm_password"].strip()
+
+        user = User.query.filter_by(email=email).first()
+
+        if not user:
+            error = "Email not found."
+        elif not check_password_hash(user.password,current_password):
+            error = "Current password is incorrect."
+        elif new_password != confirm_password:
+            error = "New passwords do not match."
+        else:
+            user.password = generate_password_hash(new_password)
+            db.session.commit()
+            success="Password updated successfully"
+            return redirect("/login")
+
+    # For GET requests or if there was an error, render the update form with messages
+    return render_template("update_password.html", error=error, success=success)
+
         
 @app.route("/admin")
 def admin():
+    print("Session date:",session) #print session contents to console/log
     if "user_id" not in session:
         return redirect("/login")
     all_contacts= Contact.query.all()
@@ -158,6 +188,5 @@ def admin():
 
 
 # Run the application if the script is executed directly
-if __name__ == "__main__":
-        
-    app.run(debug=True)
+if __name__ == "__main__":   
+        app.run(debug=True)

@@ -8,8 +8,6 @@
 
     <form method="POST" action="{{url_for('login')}}">
     <div class="form-group">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" name="username" id="username" class="form-input" required>
         <label for="email" class="form-label">Email</label>
         <input type="email" name="email" id="email" class="form-input" required>
          </div>
@@ -32,6 +30,13 @@
             <button type="submit" class="login-button">Login</button>
         </div>
        </form>
+       <!-- Password update option  -->
+        <div style="margin-top: 20px; text-align: center;"> 
+         <a href="{{url_for('update_password')}}">
+            forgot or Update password?
+         </a>
+        </div>
+
 </div>
 
 {% endblock %}
