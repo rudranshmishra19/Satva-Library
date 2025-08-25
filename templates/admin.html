@@ -11,24 +11,30 @@
 <!-- Admin page -->
  <h2>Admin panel</h2>
  <h3>Contacts</h3>
+ <div class="admin-content-wrapper">
+ <div class="table-container">
+
+ 
 <table border="1">
     <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Email</th>
-         <th>Number</th>
-         <th>Message</th>
+        <th class="id">Id</th>
+        <th class="name">Name</th>
+        <th class="email">Email</th>
+         <th class="number">Number</th>
+         <th class="message">Message</th>
     </tr>
     {% for c in contacts %}
      <tr>
-        <td>{{c.id }}</td>
-        <td>{{c.Name }}</td>
-        <td>{{c.Email }}</td>
-        <td>{{c.Number }}</td>
-        <td>{{c.Message }}</td>
+        <td class="id">{{c.id }}</td>
+        <td class="name">{{c.Name }}</td>
+        <td class="email">{{c.Email }}</td>
+        <td class="number">{{c.Number }}</td>
+        <td class="message">{{c.Message }}</td>
      </tr>
      {% endfor %}
 </table>
 
+</div>
+</div>
 
  {% endblock %}

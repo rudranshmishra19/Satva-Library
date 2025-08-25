@@ -94,36 +94,22 @@
       
     </script>
     <script>
-  window.onload = function () {
-    // Step 1: Get URL parameters
-    const urlParams = new URLSearchParams(window.location.search);
+ window.onload = function () {
+  // Step 1: Get URL parameters
+  const urlParams = new URLSearchParams(window.location.search);
 
-    // Step 2: Get the value of the 'plan' parameter from the URL
-    const selectedPlan = urlParams.get("plan");
+  // Step 2: Get the value of the 'plan' parameter from the URL
+  const selectedPlan = urlParams.get("plan");
 
-    // Step 3: Reference to the dropdown element
-    const planDropdown = document.querySelector("select");
+  // Step 3: Reference to the dropdown element
+  const planDropdown = document.querySelector("select");
 
-    // Step 4: Map plan codes to visible dropdown text
-    const planMap = {
-      "thinker-400": "थिंकर प्लान ₹400/महीना",
-      "seeker-1000": "सीकर प्लान ₹1000/महीना",
-      "thinker-4000": "थिंकर वार्षिक ₹4000/वर्ष",
-      "seeker-10000": "सीकर वार्षिक ₹10,000/वर्ष"
-    };
+  // Step 4: If a matching plan is found in URL, update the dropdown
+  if (selectedPlan) {
+    planDropdown.value = selectedPlan;
+  }
+};
 
-    // Step 5: If a matching plan is found in URL, update the dropdown
-    if (selectedPlan && planMap[selectedPlan]) {
-      const displayText = planMap[selectedPlan];
-
-      for (let i = 0; i < planDropdown.options.length; i++) {
-        if (planDropdown.options[i].text === displayText) {
-          planDropdown.selectedIndex = i;
-          break;
-        }
-      }
-    }
-  };
 </script>
  <!-- Show password Toggle Script -->
   <script>

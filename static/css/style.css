@@ -54,14 +54,52 @@
       /* form button:hover{
          background-color: #4a76b1;
       } */
-      .center-content table{
-        margin: auto;
-        border-collapse: collapse;
+       .admin-content-wrapper{
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box;
+       }
+      .table-container{
+        max-width: 750px;
+        margin: 40px auto 0 auto;
+        border-radius: 10px;
+        width: 100%;
+        display: block;
+        overflow-x: auto;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+
       }
-      .center-content th,.center-content td{
+      .table-container table{
+       width: 100%;
+       border-collapse: collapse;
+      }
+      .table-container th,.table-container td{
         border: 1px solid #333;
         padding: 8px;
+        word-break: break-word;
+        max-width: 180px;
+        white-space: normal;
+        text-align: left;
       }
+      .table-container th:nth-child(1),
+      .table-container td:nth-child(1) {width:50px ;}
+      .table-container th:nth-child(2),
+      .table-container td:nth-child(2) {width: 130px;}
+      .table-container th:nth-child(3),
+      .table-container td:nth-child(3) {width: 180px;}
+      .table-container th:nth-child(4),
+      .table-container td:nth-child(4) {width: 140px;}
+      .table-container th:nth-child(5),
+      .table-container td:nth-child(5) {width: 120px;}
+      
+      @media(max-width:480px){
+        .table-container table{
+          font: size 0.9rem;
+        }
+      }
+
       .intro-section h4{
         font-size: 1.75rem;
         font-weight: 600;
