@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block hero %}
+{% endblock %}
+{% block content %}
+    <h1>Payment Successful</h1>
+    <p>Your payment ID: <strong> {{payment_id}}</strong></p>
+    {% if booking_id %}
+    <p>Your booking ID: <strong>{{booking_id}}</strong></p>
+    {% else %}
+    <p>Booking information not found.</p>
+    {% endif %}
+    <a href="{{url_for('home')}}">Return to Home</a>
+{% endblock %}
+{% block footer %}
+{% endblock %}

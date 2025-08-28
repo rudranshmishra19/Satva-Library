@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session,flash
+from flask import Flask, render_template, request, redirect, session,flash,abort
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash,check_password_hash
 from dotenv import load_dotenv
@@ -50,6 +50,7 @@ class Booking(db.Model):
     phone=db.Column(db.String(20),nullable=False)
     plan=db.Column(db.String(50),nullable=False)
     start_date=db.Column(db.String(20),nullable=False)   
+    paid=db.Column(db.Boolean,default=False) #New column for payment status 
 # Define a route for the root URL ("/")
 @app.route("/")
 @app.route("/home")
@@ -127,8 +128,49 @@ def submit_booking():
     # for get show the booking form 
     return render_template("book.html")
 
-  
+@app.route("/payment_success",methods=["GET","POST"])
+def payment_success():
+    #Get payment details from request args or from data
+    payment_id=request.args.get("payment_id") or request.form.get("payment_id")
+    order_id=request.args.get("order_id") or request.form.get("order_id")
+    signature=request.args.get("signature") or request.form.get("signature")
 
+
+    if not payment_id or not order_id or not signature: 
+        abort(400, description="Missing payment details")
+    
+    # Verify the payment signature to ensure it's valid and from razorpay 
+    try:
+        params_dict={
+
+            "razorpay_order_id":order_id,
+            "razorpay_payment_id":payment_id,
+            "razorpay_signature":signature
+        }
+         # This method raises an exception if verification fails
+        razorpay_client.utility.verify_payment_signature(params_dict)
+    except razorpay.errors.SignatureVerificationError:
+        abort(400,description="Payment signature verfication failed")
+
+    booking_id=None
+    if order_id:
+       razorpay_order=razorpay_client.order.fetch(order_id)
+       receipt=razorpay_order.get("receipt")
+
+       if receipt and receipt.startswith("booking_"):
+           try:
+               booking_id=int(receipt.split("_")[1])
+           except (IndexError,ValueError):
+               booking_id=None
+    if booking_id:
+        booking=Booking.query.get(booking_id)
+        if booking:
+            booking.paid=True
+            db.session.commit()
+    
+    return render_template("payment_success.html",payment_id=payment_id,booking_id=booking_id)
+   
+       
 
 
 
