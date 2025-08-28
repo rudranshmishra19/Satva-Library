@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block hero %}
+{% endblock %}
+{% block content %}
+<!-- Contents goes here -->
+ <div class="payment-checkout-container">
+    <h2>पेमेन्ट प्रक्रिया जारी है...</h2>
+    <p>कृपया प्रतीक्षा करें, भुगतान पॉपअप खुल रहा है।</p>
+ </div>
+ <!-- Razorpay Checkout JS -->
+  <script
+    src="https://checkout.razorpay.com/v1/checkout.js">
+  </script>
+  <script>
+    var options={
+        "key":"{{razorpay_key_id}}",
+        "amount":"{{amount}}",
+        "currency":"INR",
+        "name":"सात्व लाइब्रेरी",
+        "description":"आपकी सदस्यता के लिए भुगतान",
+        "order_id":"{{razorpay_order_id}}",
+        "handler":function(response){
+            window.location.href='/payment_success? payment_id= '+ response.razorpay_payment_id + '&order_id='+
+            response.razorpay_order_id +'&signature='+response.razorpay_signature;
+
+        },
+        "prefill":{
+            "name":"{{name}}",
+            "email":"{{email}}",
+            "contact":"{{phone}}"
+        },
+        "theme" :{
+            "color": "#3399cc"
+        }
+    };
+    var rzp1=new Razorpay(options);
+    rzp1.open();
+   
+  </script>
+{% endblock %}
+{% block footer %}
+{% endblock %}
