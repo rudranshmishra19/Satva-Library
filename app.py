@@ -121,7 +121,7 @@ def submit_booking():
         session['razorpay_order_id'] = razorpay_order['id']
         return render_template("payment_checkout.html",
                                razorpay_order_id=razorpay_order['id'],
-                               razorpay_key_id=os.environ.get("RAZORPAY_KEY_ID"),
+                               razorpay_key_id=os.environ.get("KEY_ID"),
                                amount=amount,
                                name=name,
                                email=email,
