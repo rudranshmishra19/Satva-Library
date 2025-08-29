@@ -5,11 +5,11 @@ from dotenv import load_dotenv
 import os
 import razorpay
 
+load_dotenv () # <- Load variables from .env
 razorpay_client=razorpay.Client(auth=(os.environ.get("RAZORPAY_KEY_ID"),os.environ.get("RAZORPAY_KEY_SECRET")))
 
 
 
-load_dotenv () # <- Load variables from .env
 # Create an instance of the Flask class
 #Initialize FlaskS
 app = Flask(__name__)
@@ -76,57 +76,61 @@ def plan():
 @app.route("/book")
 def book():
     return render_template("book.html")
-
-@app.route("/payment_checkout",methods=["GET","POST"])
+@app.route("/payment_checkout", methods=["GET", "POST"])
 def submit_booking():
-    if request.method =="POST":
-        name=request.form["name"]
-        email=request.form["email"]
-        phone=request.form["phone"]
-        plan=request.form["plan"]
-        start_date=request.form["start_date"]
+    if request.method == "POST":
+        name = request.form["name"]
+        email = request.form["email"]
+        phone = request.form["phone"]
+        plan = request.form["plan"]
+        start_date = request.form["start_date"]
 
-    #Step 1: Save to database
-        new_booking=Booking(
-          name=name,
-          email=email,
-          phone=phone,
-          plan=plan,
-          start_date=start_date
-       )
+        # Step 1: Save to database
+        new_booking = Booking(
+            name=name,
+            email=email,
+            phone=phone,
+            plan=plan,
+            start_date=start_date
+        )
         db.session.add(new_booking)
         db.session.commit()
-    #Step 2:Determine amount in paise (smallest INR unit)
-        plan_amount_map={
+
+        # Step 2: Determine amount in paise (smallest INR unit)
+        plan_amount_map = {
             "सिल्वर प्लान ₹400/महीना": 40000,
-            "गोल्ड प्लान ₹1000/महीना": 100000, #correct paise value
+            "गोल्ड प्लान ₹1000/महीना": 100000,
             "सिल्वर वार्षिक ₹4000/वर्ष": 400000,
             "गोल्ड वार्षिक ₹10,000/वर्ष": 1000000
-
         } 
-        amount=plan_amount_map.get(plan,0)
+        amount = plan_amount_map.get(plan, 0)
 
-    #    Create Razorpay order
-        razorpay_order = razorpay_client.order.create({
-            "amount":amount, 
-            "currency":"INR",
-            "receipt":f"booking_{new_booking.id}",
-            "payment_capture":'1' 
-            # automatic capture
-        })
-        #  save order id in session or pass it to the template
-        session['razorpay_order_id']=razorpay_order['id']
-        # Render a template or redirect to a page that loads Razorpay Checkout
-        return render_template("payment_checkout.html", 
-        razorpay_order_id=razorpay_order['id'],
-        razorpay_key_id=os.environ.get("RAZORPAY_KEY_ID"),
-                                        amount=amount,
-                                        name=name,
-                                        email=email,
-                                        phone=phone,
-                                        booking_id=new_booking.id)
-    # for get show the booking form 
+        # Create Razorpay order
+        try:
+            razorpay_order = razorpay_client.order.create({
+                "amount": amount,
+                "currency": "INR",
+                "receipt": f"booking_{new_booking.id}",
+                "payment_capture": '1'  # automatic capture
+            })
+        except razorpay.errors.BadRequestError:
+            flash("Payment gateway authentication failed.", "danger")
+            return render_template("book.html")
+
+        # Save order id in session and render checkout template
+        session['razorpay_order_id'] = razorpay_order['id']
+        return render_template("payment_checkout.html",
+                               razorpay_order_id=razorpay_order['id'],
+                               razorpay_key_id=os.environ.get("RAZORPAY_KEY_ID"),
+                               amount=amount,
+                               name=name,
+                               email=email,
+                               phone=phone,
+                               booking_id=new_booking.id)
+
+    # For GET requests show booking form
     return render_template("book.html")
+
 
 @app.route("/payment_success",methods=["GET","POST"])
 def payment_success():
