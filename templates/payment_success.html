@@ -2,6 +2,8 @@
 {% block hero %}
 {% endblock %}
 {% block content %}
+<div class=" payment-sucess">
+
     <h1>Payment Successful</h1>
     <p>Your payment ID: <strong> {{payment_id}}</strong></p>
     {% if booking_id %}
@@ -10,6 +12,7 @@
     <p>Booking information not found.</p>
     {% endif %}
     <a href="{{url_for('home')}}">Return to Home</a>
+</div>
 {% endblock %}
 {% block footer %}
 {% endblock %}

@@ -8,32 +8,55 @@
 <div class="logout-button">
 <a href="{{url_for('logout')}}">Logout</a>       
  </div>
-<!-- Admin page -->
- <h2>Admin panel</h2>
- <h3>Contacts</h3>
- <div class="admin-content-wrapper">
- <div class="table-container">
 
- 
-<table border="1">
-    <tr>
-        <th class="id">Id</th>
-        <th class="name">Name</th>
-        <th class="email">Email</th>
-         <th class="number">Number</th>
-         <th class="message">Message</th>
-    </tr>
-    {% for c in contacts %}
-     <tr>
-        <td class="id">{{c.id }}</td>
-        <td class="name">{{c.Name }}</td>
-        <td class="email">{{c.Email }}</td>
-        <td class="number">{{c.Number }}</td>
-        <td class="message">{{c.Message }}</td>
-     </tr>
-     {% endfor %}
-</table>
 
+     <!-- Admin page -->
+     <h2>Admin panel</h2>
+     <h3>Contacts</h3>
+     <div class="admin-content-wrapper">
+         <div class="table-container">
+             
+             
+             <table border="1">
+                 <tr>
+                     <th class="id">Id</th>
+                     <th class="name">Name</th>
+                     <th class="email">Email</th>
+                     <th class="number">Number</th>
+                     <th class="message">Message</th>
+                    </tr>
+                    {% for c in contacts %}
+                    <tr>
+                        <td class="id">{{c.id }}</td>
+                        <td class="name">{{c.Name }}</td>
+                        <td class="email">{{c.Email }}</td>
+                        <td class="number">{{c.Number }}</td>
+                        <td class="message">{{c.Message }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+         <!-- Database for booking submission  -->
+           <table border="1">
+                 <tr>
+                     <th class="id">Id</th>
+                     <th class="name">Name</th>
+                     <th class="email">Email</th>
+                     <th class="phone">Phone</th>
+                     <th class="plan ">Plan</th>
+                     <th class="start_date">Start_date</th>
+                    </tr>
+                    {% for b in booking %}
+                    <tr>
+                        <td class="id">{{b.id}}</td>
+                        <td class="name">{{b.name}}</td>
+                        <td class="email">{{b.email}}</td>
+                        <td class="phone">{{b.phone}}</td>
+                        <td class="plan">{{b.plan}}</td>
+                        <td class="start_date">{{b.start_date}}</td>
+                        <td class="Paid">{{ 'Yes' if b.paid else 'No'}}</td>
+                    </tr>
+                    {% endfor %}
+                
 </div>
 </div>
 

@@ -251,7 +251,8 @@ def admin():
     if "user_id" not in session:
         return redirect("/login")
     all_contacts= Contact.query.all()
-    return render_template("admin.html",contacts=all_contacts)
+    all_booking=Booking.query.all()
+    return render_template("admin.html",contacts=all_contacts,booking=all_booking)
 
 
 # Run the application if the script is executed directly
