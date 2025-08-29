@@ -6,7 +6,7 @@ import os
 import razorpay
 
 load_dotenv () # <- Load variables from .env
-razorpay_client=razorpay.Client(auth=(os.environ.get("RAZORPAY_KEY_ID"),os.environ.get("RAZORPAY_KEY_SECRET")))
+razorpay_client=razorpay.Client(auth=(os.environ.get("KEY_ID"),os.environ.get("KEY_SECRET")))
 
 
 
