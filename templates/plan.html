@@ -13,28 +13,30 @@
       <h3>सिल्वर प्लान </h3>
       <p><strong>₹400/महीना</strong></p>
       <p>प्रत्येक दिन <strong>4 घंटे</strong> की सुविधा <br>("सुबह 6 बजे से रात 10 बजे तक किसी भी समय")</p>
-      <a href="{{url_for('book')}}?plan=thinker-400"class="btn">बुक करें</a>
+     <a href="{{ url_for('book') }}?plan=सिल्वर प्लान ₹400/महीना" class="btn">बुक करें</a>
+
      </div>
      <!-- Seeker plan -->
       <div class="card popular">
         <h3>गोल्ड प्लान</h3>
         <p><strong>₹1000/महीना</strong></p>
         <p><strong>अनलिमिटेड एक्सेस</strong> ("सुबह 6 बजे से रात 10 बजे तक, हर दिन")<br></p>
-       <a href="{{url_for('book')}}?plan=seeker-1000"class="btn">बुक करें</a>
+       <a href="{{ url_for('book') }}?plan=गोल्ड प्लान ₹1000/महीना" class="btn">बुक करें</a>
+
       </div>
       <!-- Thinker Annual -->
        <div class="card">
         <h3>सिल्वर वार्षिक</h3>
         <p><strong>₹4000/वर्ष</strong></p>
         <p>2 महीने<strong>नि:शुल्क</strong><br>हर दिन 4 घंटे की सुविधा</p>
-      <a href="{{url_for('book')}}?plan=thinker-4000"class="btn">बुक करें</a>
+      <a href="{{ url_for('book') }}?plan=सिल्वर वार्षिक ₹4000/महीना" class="btn">बुक करें</a>
        </div>
        <!-- Seeker Annual -->
         <div class="card">
           <h3>गोल्ड वार्षिक</h3>
           <p><strong>₹10,000/वर्ष</strong></p>
           <p>2 महीने <strong>नि:शुल्क</strong><br>पूरा दिन अनलिमिटेड एक्सेस</p>
-       <a href="{{url_for('book')}}?plan=seeker-10000"class="btn">बुक करें</a>
+      <a href="{{ url_for('book') }}?plan=गोल्ड वार्षिक ₹10000/महीना" class="btn">बुक करें</a>
           
         </div>
   </div>
