@@ -27,6 +27,12 @@ print("Active DB URL:",db_url)
 app.config['SQLALCHEMY_DATABASE_URI']=db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']= False
 
+#  connection pool and pre-ping
+app.config['SQLALCHEMY_POOL_RECYCLE']=280
+app.config['SQLALCHEMY_POOL_TIMEOUT']=10
+app.config['SQLALCHEMY_ENGINE_OPTIONS']={'pool_pre_ping':True}
+
+
 db=SQLAlchemy(app)
 with app.app_context():
     db.create_all()
