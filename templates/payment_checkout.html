@@ -14,13 +14,13 @@
   <script>
     var options={
         "key":"{{razorpay_key_id}}",
-        "amount":"{{amount}}",
+        "amount": "{{ amount }}",
         "currency":"INR",
         "name":"सात्व लाइब्रेरी",
         "description":"आपकी सदस्यता के लिए भुगतान",
         "order_id":"{{razorpay_order_id}}",
         "handler":function(response){
-            window.location.href='/payment_success?payment_id= '+ response.razorpay_payment_id + '&order_id='+
+            window.location.href='/payment_success?payment_id=' + response.razorpay_payment_id + '&order_id='+
             response.razorpay_order_id +'&signature='+response.razorpay_signature;
 
         },
