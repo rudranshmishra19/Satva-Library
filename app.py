@@ -46,8 +46,8 @@ try:
         razorpay_client = DummyRazorpayClient()
     else:
         # Create session with retry configuration
-        session = requests.Session()
-        for adapter in session.adapters.values():
+        requests_session = requests.Session()
+        for adapter in requests_session.adapters.values():
             adapter.max_retries = 3
         
         razorpay_client = razorpay.Client(auth=(key_id, key_secret))
