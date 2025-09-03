@@ -46,13 +46,13 @@ try:
         razorpay_client = DummyRazorpayClient()
     else:
         # Create session with retry configuration
-        req_session = requests.Session()
+        session = requests.Session()
         for adapter in session.adapters.values():
             adapter.max_retries = 3
         
         razorpay_client = razorpay.Client(auth=(key_id, key_secret))
         # Use our custom session with retry settings
-        razorpay_client.session = req_session
+        razorpay_client.session = session
         
 except Exception as e:
     logger.error(f"Failed to initialize Razorpay client: {e}")
