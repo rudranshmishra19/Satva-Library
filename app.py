@@ -52,7 +52,7 @@ try:
         
         razorpay_client = razorpay.Client(auth=(key_id, key_secret))
         # Use our custom session with retry settings
-        razorpay_client.session = session
+       
         
 except Exception as e:
     logger.error(f"Failed to initialize Razorpay client: {e}")
