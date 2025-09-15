@@ -54,45 +54,66 @@
       /* form button:hover{
          background-color: #4a76b1;
       } */
-       .admin-content-wrapper{
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 20px;
-        box-sizing: border-box;
-       }
-      .table-container{
-        max-width: 750px;
-        margin: 40px auto 0 auto;
-        border-radius: 10px;
-        width: 100%;
-        display: block;
-        overflow-x: auto;
-        background: #fff;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+     .admin-content-wrapper {
+  max-width: 1700px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
 
-      }
-      .table-container table{
-       width: 100%;
-       border-collapse: collapse;
-      }
-      .table-container th,.table-container td{
-        border: 1px solid #333;
-        padding: 8px;
-        word-break: break-word;
-        max-width: 180px;
-        white-space: normal;
-        text-align: left;
-      }
-      .table-container th:nth-child(1),
-      .table-container td:nth-child(1) {width:50px ;}
-      .table-container th:nth-child(2),
-      .table-container td:nth-child(2) {width: 130px;}
-      .table-container th:nth-child(3),
-      .table-container td:nth-child(3) {width: 180px;}
-      .table-container th:nth-child(4),
-      .table-container td:nth-child(4) {width: 140px;}
-      .table-container th:nth-child(5),
-      .table-container td:nth-child(5) {width: 120px;}
+.table-container {
+  max-width: 100%;
+  margin: 40px auto 0 auto;
+  border-radius: 10px;
+  width: 100%;
+  display: block;
+  overflow-x: auto;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto; /* dynamic sizing */
+}
+
+.table-container th,
+.table-container td {
+  border: 1px solid #333;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 14px;
+}
+
+/* keep headers in single line */
+.table-container th {
+  white-space: nowrap;
+  background: #f9f9f9;
+  font-weight: 600;
+}
+
+/* let cell content wrap if too long */
+.table-container td {
+  white-space: normal;
+  word-break: break-word;
+  max-width: 250px;
+}
+
+/* style delete button */
+td.actions a {
+  background: #e74c3c;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 13px;
+  transition: background 0.2s ease-in-out;
+}
+td.actions a:hover {
+  background: #c0392b;
+}
+
       
       @media(max-width:480px){
         .table-container table{
@@ -606,28 +627,30 @@
       .book-btn:hover{
         background-color: #357bd8;
       }
-      .logout-button{
-        text-align: right;
-        margin: 20px;
-      }
-    
-      .logout-button form{
-        display: inline-block;
-      }
-      .logout-button button{
-        background-color: #e74c3c;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        font-weight: bold;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-        box-shadow: 0 2px 5px rgba( 0,0 ,0 ,0.1);
-      }
-      .logout-button button:hover{
-        background-color: #c0392b;
-      }
+     .logout-button {
+  text-align: right;
+  margin: 20px;
+}
+
+.logout-button a {
+  display: inline-block;
+  background-color: #e74c3c;  /* Red theme */
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.logout-button a:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
       footer{
         background-color: #f4f4f4;
         padding: 20px;
@@ -644,6 +667,141 @@
         font-family: 'Noto Sans', 'Noto Sans Devangari',sans-serif;
       }
       /* Responsive adjustments for tablets and smaller screens */
+       .payment-checkout-container{
+    max-width: 500px;
+    margin: 40 px auto;
+    padding: 25px;
+    border: 2px solid #3399cc;
+    border-radius: 8px;
+    background-color: #f0f8ff;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+  }
+  .payment-checkout-container h2{
+    color: #3399cc;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  .payment-checkout-container p{
+    font-size: 1.1rem;
+    margin-top: 0;
+  }
+  .payment-sucess{
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #e6f9ef;
+    border: 2px solid #4caf50;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2e7d32;
+    /* Dark green text */
+
+  }
+  .payment-sucess h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  .payment-sucess p{
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+  .payment-sucess a{
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 25px;
+    background-color: #4caf50; /*green button */
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  .payment-sucess a:hover{
+    background-color: #388e3c;
+  }
+  .Delete-button {
+    max-width: 400px;              /* limit box width */
+    margin: 80px auto;             /* center horizontally with spacing */
+    padding: 20px;
+    background-color: #fff;        /* white background */
+    border: 1px solid #ddd;        /* light border */
+    border-radius: 8px;            /* rounded corners */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);  /* soft shadow */
+    text-align: center;            /* center the text */
+    font-family: Arial, sans-serif;
+}
+
+.Delete-button p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.Delete-button strong {
+    color: #d9534f; /* red highlight for name */
+}
+
+.Delete-button form {
+    margin-top: 20px;
+}
+
+.Delete-button button {
+    background-color: #d9534f;     /* Bootstrap red */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.Delete-button button:hover {
+    background-color: #c9302c;     /* darker red on hover */
+}
+
+.Delete-button a {
+    background-color: #6c757d;     /* gray cancel */
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.Delete-button a:hover {
+    background-color: #5a6268;     /* darker gray on hover */
+}
+/* Center align actions column */
+td.actions {
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;   /* keep text in one line */
+}
+
+/* Delete link as a button */
+td.actions a {
+    display: inline-block;
+    background-color: #d9534f;   /* red background */
+    color: white;                /* white text */
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    text-decoration: none;       /* remove underline */
+    transition: background 0.3s ease;
+}
+
+/* Hover effect */
+td.actions a:hover {
+    background-color: #c9302c;   /* darker red */
+}
+
+
 @media (max-width: 768px) {
   nav .nav-wrapper {
     flex-direction: column;
@@ -813,59 +971,4 @@
     display: flex;
   }
 }
-  .payment-checkout-container{
-    max-width: 500px;
-    margin: 40 px auto;
-    padding: 25px;
-    border: 2px solid #3399cc;
-    border-radius: 8px;
-    background-color: #f0f8ff;
-    text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-  }
-  .payment-checkout-container h2{
-    color: #3399cc;
-    margin-bottom: 12px;
-    font-weight: 700;
-  }
-  .payment-checkout-container p{
-    font-size: 1.1rem;
-    margin-top: 0;
-  }
-  .payment-sucess{
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 30px;
-    background-color: #e6f9ef;
-    border: 2px solid #4caf50;
-    border-radius: 10px;
-    text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #2e7d32;
-    /* Dark green text */
-
-  }
-  .payment-sucess h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    font-weight: 700;
-  }
-  .payment-sucess p{
-    font-size: 1.2rem;
-    margin: 10px 0;
-  }
-  .payment-sucess a{
-    display: inline-block;
-    margin-top: 25px;
-    padding: 12px 25px;
-    background-color: #4caf50; /*green button */
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  .payment-sucess a:hover{
-    background-color: #388e3c;
-  }
+ 

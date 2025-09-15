@@ -12,6 +12,7 @@
 
      <!-- Admin page -->
      <h2>Admin panel</h2>
+     <!-- Contacts -->
      <h3>Contacts</h3>
      <div class="admin-content-wrapper">
          <div class="table-container">
@@ -24,6 +25,8 @@
                      <th class="email">Email</th>
                      <th class="number">Number</th>
                      <th class="message">Message</th>
+                     <!-- New column  -->
+                     <th class="actions">Actions</th>
                     </tr>
                     {% for c in contacts %}
                     <tr>
@@ -32,11 +35,18 @@
                         <td class="email">{{c.Email }}</td>
                         <td class="number">{{c.Number }}</td>
                         <td class="message">{{c.Message }}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
-         <!-- Database for booking submission  -->
-           <table border="1">
+                         <td class="actions">
+                            <!-- Delete button that leads to confirmation page  -->
+                             <a href="{{url_for('delete', record_type='contact',id=c.id )}}">Delete</a>
+                             
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    
+                    <h2>Booking details </h2>
+                    <!-- Database for booking submission  -->
+                    <table border="1">
                  <tr>
                      <th class="id">Id</th>
                      <th class="name">Name</th>
@@ -44,6 +54,8 @@
                      <th class="phone">Phone</th>
                      <th class="plan ">Plan</th>
                      <th class="start_date">Start_date</th>
+                     <th class="actions">Actions</th>
+                     
                     </tr>
                     {% for b in booking %}
                     <tr>
@@ -54,6 +66,13 @@
                         <td class="plan">{{b.plan}}</td>
                         <td class="start_date">{{b.start_date}}</td>
                         <td class="Paid">{{ 'Yes' if b.paid else 'No'}}</td>
+                        <td class="0"></td>
+                        <td class="actions">
+                            <!-- Delete button that leads to confirmation page  -->
+                            <a href="{{url_for('delete', record_type='booking',id=b.id )}}">Delete</a>
+                            
+                             
+                         </td>
                     </tr>
                     {% endfor %}
                 
@@ -61,3 +80,6 @@
 </div>
 
  {% endblock %}
+ {% block footer %}
+ <!-- Left the footer block  -->
+ {%endblock %}
