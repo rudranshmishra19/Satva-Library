@@ -9,9 +9,9 @@
     <p><strong>{{ record.Name if type=='contact' else record.name }}</strong>
        {{ record.Email if type=='contact' else record.email }}</p>
 
-    <form action="{{ url_for('delete', record_type=type, id=record.id) }}" method="post">
+    <form action="{{ url_for('auth.delete', record_type=type, id=record.id) }}" method="post">
         <button type="submit">Yes, Delete</button>
-        <a href="{{ url_for('admin') }}">Cancel</a>
+        <a href="{{ url_for('auth.admin') }}">Cancel</a>
     </form>
 </div>
 {% endblock %}

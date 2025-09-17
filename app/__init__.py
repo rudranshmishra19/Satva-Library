@@ -1,15 +1,16 @@
 from flask import Flask
+# import config from app.config file
 from app.config import Config
+# import modeles from 
 from app.models import db
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, template_folder="../templates", static_folder="../static")
     app.config.from_object(Config)
 
     # Initialize database
     db.init_app(app)
 
-   
     from app.routes.main import main_bp
     from app.routes.booking import booking_bp
     from app.routes.auth import auth_bp

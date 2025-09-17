@@ -6,7 +6,7 @@
 {% block content %}
 <!--Logout button-->
 <div class="logout-button">
-<a href="{{url_for('logout')}}">Logout</a>       
+<a href="{{url_for('auth.logout')}}">Logout</a>       
  </div>
 
 
@@ -37,7 +37,7 @@
                         <td class="message">{{c.Message }}</td>
                          <td class="actions">
                             <!-- Delete button that leads to confirmation page  -->
-                             <a href="{{url_for('delete', record_type='contact',id=c.id )}}">Delete</a>
+                             <a href="{{url_for('auth.delete', record_type='contact',id=c.id )}}">Delete</a>
                              
                             </td>
                         </tr>
@@ -69,7 +69,7 @@
                         <td class="0"></td>
                         <td class="actions">
                             <!-- Delete button that leads to confirmation page  -->
-                            <a href="{{url_for('delete', record_type='booking',id=b.id )}}">Delete</a>
+                            <a href="{{url_for('auth.delete', record_type='booking',id=b.id )}}">Delete</a>
                             
                              
                          </td>

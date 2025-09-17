@@ -6,7 +6,7 @@
 <div class="login-container">
     <h2 class="login-title">Login</h2>
 
-    <form method="POST" action="{{url_for('login')}}">
+    <form method="POST" action="{{url_for('auth.login')}}">
     <div class="form-group">
         <label for="email" class="form-label">Email</label>
         <input type="email" name="email" id="email" class="form-input" required>
@@ -32,7 +32,7 @@
        </form>
        <!-- Password update option  -->
         <div style="margin-top: 20px; text-align: center;"> 
-         <a href="{{url_for('update_password')}}">
+         <a href="{{url_for('auth.update_password')}}">
             forgot or Update password?
          </a>
         </div>

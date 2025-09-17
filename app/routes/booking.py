@@ -5,6 +5,7 @@ from requests.exceptions import ConnectionError, RequestException
 import time
 import logging
 import razorpay.errors
+import os
 
 
 booking_bp = Blueprint('booking', __name__)
@@ -44,7 +45,7 @@ def submit_booking():
                 return render_template("book.html")
 
             max_retries = 3
-            razorpay_order = None
+            razorpay_key_id=os.environ.get("KEY_ID")  # load from .env
             
             for attempt in range(max_retries):
                 try:
@@ -89,7 +90,7 @@ def submit_booking():
             session['razorpay_order_id'] = razorpay_order['id']
             return render_template("payment_checkout.html",
                                    razorpay_order_id=razorpay_order['id'],
-                                   razorpay_key_id=None,  # use os.environ.get("KEY_ID") in config if needed
+                                   razorpay_key_id=os.environ.get("KEY_ID"),
                                    amount=amount,
                                    name=name,
                                    email=email,
